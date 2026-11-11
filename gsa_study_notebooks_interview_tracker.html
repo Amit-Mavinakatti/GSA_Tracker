@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSA 2026 | Study Notebooks Interview Tracker</title>
+    <style>
+        :root {
+            --google-blue: #1a73e8;
+            --google-blue-hover: #1557b0;
+            --google-blue-light: #e8f0fe;
+            --google-red: #ea4335;
+            --google-red-light: #fce8e6;
+            --google-yellow: #fbbc04;
+            --google-yellow-light: #fef7e0;
+            --google-green: #34a853;
+            --google-green-light: #e6f4ea;
+            
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --border-color: #dadce0;
+            --border-color-light: #f1f3f4;
+            
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --text-muted: #80868b;
+            
+            --shadow-subtle: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            --shadow-card: 0 1px 3px 0 rgba(60,64,67,0.12), 0 4px 8px 3px rgba(60,64,67,0.04);
+            --shadow-elevated: 0 4px 12px rgba(0,0,0,0.15);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Header */
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .brand-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-badge {
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-text h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-text p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .ambassador-badge {
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 8px 16px;
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+        }
+
+        .ambassador-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ambassador-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .ambassador-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Layout Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 24px auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        /* General Card */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* Notice Banner */
+        .privacy-notice {
+            background-color: var(--google-blue-light);
+            border-left: 4px solid var(--google-blue);
+            padding: 12px 16px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 13px;
+            color: #174ea6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        /* Statistics Bar */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--border-color);
+        }
+
+        .stat-card.blue::before { background-color: var(--google-blue); }
+        .stat-card.green::before { background-color: var(--google-green); }
+        .stat-card.yellow::before { background-color: var(--google-yellow); }
+        .stat-card.red::before { background-color: var(--google-red); }
+
+        .stat-title {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-top: 4px;
+        }
+
+        /* Progress Card */
+        .progress-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .progress-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .progress-percent {
+            font-weight: 700;
+            color: var(--google-blue);
+            font-size: 16px;
+        }
+
+        .progress-bar-bg {
+            background-color: var(--border-color-light);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* Workflow Banner */
+        .workflow-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 24px;
+        }
+
+        .workflow-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+        }
+
+        .workflow-step {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color-light);
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+        }
+
+        .workflow-step strong {
+            display: block;
+            color: var(--google-blue);
+            margin-bottom: 2px;
+        }
+
+        /* Control Panel / Actions */
+        .controls-card {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .search-filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            flex: 1;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            width: 240px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--google-blue);
+            box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+        }
+
+        .filter-select {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            background-color: white;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .btn-primary {
+            background-color: var(--google-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--google-blue-hover);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-body);
+        }
+
+        .btn-danger {
+            background-color: white;
+            border-color: #fce8e6;
+            color: var(--google-red);
+        }
+
+        .btn-danger:hover {
+            background-color: var(--google-red-light);
+        }
+
+        .btn-sm {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        /* Table Container */
+        .table-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            max-height: 65vh;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        thead {
+            background-color: var(--bg-body);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 1px 0 var(--border-color);
+        }
+
+        th {
+            padding: 12px 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border-color-light);
+            vertical-align: middle;
+        }
+
+        /* Row Status Styling */
+        tr.row-completed {
+            background-color: rgba(52, 168, 83, 0.03);
+        }
+        tr.row-in-progress {
+            background-color: rgba(251, 188, 4, 0.03);
+        }
+        tr.row-not-started {
+            background-color: #ffffff;
+        }
+
+        /* Inputs within Table */
+        .table-input-text {
+            width: 100%;
+            min-width: 130px;
+            padding: 6px 8px;
+            border: 1px solid transparent;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            background: transparent;
+        }
+
+        .table-input-text:hover {
+            border-color: var(--border-color);
+            background: white;
+        }
+
+        .table-input-text:focus {
+            border-color: var(--google-blue);
+            background: white;
+            outline: none;
+        }
+
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkbox-custom {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--google-blue);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-not-started {
+            background-color: #f1f3f4;
+            color: var(--text-secondary);
+        }
+
+        .status-in-progress {
+            background-color: var(--google-yellow-light);
+            color: #b06000;
+        }
+
+        .status-completed {
+            background-color: var(--google-green-light);
+            color: #137333;
+        }
+
+        /* Video Link Field Group */
+        .video-link-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 180px;
+        }
+
+        .video-url-input {
+            flex: 1;
+            padding: 4px 6px;
+            font-size: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+        }
+
+        .link-badge-pending {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Empty state */
+        .empty-state {
+            padding: 40px;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            background-color: #323232;
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            box-shadow: var(--shadow-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            min-width: 250px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: var(--shadow-elevated);
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .modal-body {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        /* Print Media Styles */
+        @media print {
+            header, .privacy-notice, .controls-card, #toast-container, .btn, .workflow-card {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .main-container {
+                padding: 0;
+                margin: 0;
+                max-width: 100%;
+            }
+
+            .table-responsive {
+                max-height: none;
+                overflow: visible;
+            }
+
+            table {
+                font-size: 10px;
+            }
+
+            th, td {
+                padding: 6px 8px;
+            }
+
+            .table-input-text, .video-url-input {
+                border: none;
+                background: transparent;
+            }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .ambassador-badge {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .search-input {
+                width: 100%;
+            }
+            .controls-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-filter-group {
+                flex-direction: column;
+            }
+            .filter-select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="header-container">
+            <div class="brand-title">
+                <div class="brand-badge">GSA 2026</div>
+                <div class="brand-text">
+                    <h1>STUDY NOTEBOOKS</h1>
+                    <p>Participant Interview Management Dashboard</p>
+                </div>
+            </div>
+            <div class="ambassador-badge">
+                <div class="ambassador-item">
+                    <span class="ambassador-label">Ambassador</span>
+                    <span class="ambassador-value">Amit</span>
+                </div>
+                <div class="ambassador-item">
+                    <span class="ambassador-label">GID</span>
+                    <span class="ambassador-value">14622</span>
+                </div>
+                <div class="ambassador-item">
+                    <span class="ambassador-label">Program</span>
+                    <span class="ambassador-value">GSA 2026 Sem 2</span>
+                </div>
+                <div class="ambassador-item">
+                    <span class="ambassador-label">Task</span>
+                    <span class="ambassador-value">Product Understanding</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- Local Privacy Notice -->
+        <div class="privacy-notice">
+            <span>🔒 <strong>Data Privacy Notice:</strong> All interview data is stored locally in your web browser. No details are transmitted to external servers.</span>
+            <button class="btn btn-sm btn-secondary" onclick="exportJSONBackup()">Export Backup</button>
+        </div>
+
+        <!-- Dynamic Statistics Row -->
+        <section class="stats-grid">
+            <div class="stat-card blue">
+                <span class="stat-title">Total Slots</span>
+                <span class="stat-value" id="stat-total-slots">50</span>
+            </div>
+            <div class="stat-card blue">
+                <span class="stat-title">Participants Added</span>
+                <span class="stat-value" id="stat-added">0</span>
+            </div>
+            <div class="stat-card yellow">
+                <span class="stat-title">Pre-Survey Completed</span>
+                <span class="stat-value" id="stat-pre-survey">0</span>
+            </div>
+            <div class="stat-card yellow">
+                <span class="stat-title">Post-Survey Completed</span>
+                <span class="stat-value" id="stat-post-survey">0</span>
+            </div>
+            <div class="stat-card yellow">
+                <span class="stat-title">Email Verified</span>
+                <span class="stat-value" id="stat-email-verified">0</span>
+            </div>
+            <div class="stat-card yellow">
+                <span class="stat-title">Videos Recorded</span>
+                <span class="stat-value" id="stat-videos">0</span>
+            </div>
+            <div class="stat-card green">
+                <span class="stat-title">Fully Completed</span>
+                <span class="stat-value" id="stat-completed">0</span>
+            </div>
+            <div class="stat-card red">
+                <span class="stat-title">Remaining Slots</span>
+                <span class="stat-value" id="stat-remaining">50</span>
+            </div>
+        </section>
+
+        <!-- Progress Bar Card -->
+        <section class="progress-card">
+            <div class="progress-header">
+                <span class="progress-title">Overall Program Interview Completion Progress</span>
+                <span class="progress-percent" id="progress-text">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+        </section>
+
+        <!-- Task Workflow Guide -->
+        <section class="workflow-card">
+            <div class="workflow-title">
+                📋 GSA Study Notebooks Interview Standard Operating Procedure (15–20 Mins)
+            </div>
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <strong>Step 1</strong>
+                    Obtain student consent.
+                </div>
+                <div class="workflow-step">
+                    <strong>Step 2</strong>
+                    Start screen & video recording.
+                </div>
+                <div class="workflow-step">
+                    <strong>Step 3</strong>
+                    Guide & complete Pre-Survey.
+                </div>
+                <div class="workflow-step">
+                    <strong>Step 4</strong>
+                    Demo Notebook, Quiz & Progress Dashboard.
+                </div>
+                <div class="workflow-step">
+                    <strong>Step 5</strong>
+                    Guide & complete Post-Survey.
+                </div>
+                <div class="workflow-step">
+                    <strong>Step 6</strong>
+                    Verify survey submission emails.
+                </div>
+                <div class="workflow-step">
+                    <strong>Step 7</strong>
+                    Upload video & paste Drive link.
+                </div>
+                <div class="workflow-step">
+                    <strong>Step 8</strong>
+                    Verify row status displays Completed.
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls: Search, Filters & Actions -->
+        <section class="controls-card card">
+            <div class="search-filter-group">
+                <input type="text" id="search-input" class="search-input" placeholder="Search by participant name..." oninput="handleSearchFilterChange()">
+                <select id="filter-select" class="filter-select" onchange="handleSearchFilterChange()">
+                    <option value="ALL">All Participants</option>
+                    <option value="NOT_STARTED">Status: Not Started</option>
+                    <option value="IN_PROGRESS">Status: In Progress</option>
+                    <option value="COMPLETED">Status: Completed</option>
+                    <option value="PRE_PENDING">Pending: Pre-Survey</option>
+                    <option value="POST_PENDING">Pending: Post-Survey</option>
+                    <option value="EMAIL_PENDING">Pending: Email Verification</option>
+                    <option value="VIDEO_PENDING">Pending: Video Recording / Link</option>
+                </select>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="handleAddParticipant()">+ Add Participant</button>
+                <button class="btn btn-secondary" onclick="exportCSV()">📥 Export CSV</button>
+                <button class="btn btn-secondary" onclick="exportJSONBackup()">💾 Export JSON</button>
+                <button class="btn btn-secondary" onclick="triggerImportJSON()">📤 Import JSON</button>
+                <input type="file" id="json-file-input" style="display: none;" accept=".json" onchange="importJSONBackup(event)">
+                <button class="btn btn-secondary" onclick="window.print()">🖨️ Print Report</button>
+                <button class="btn btn-danger" onclick="confirmResetAll()">⚠️ Reset All Data</button>
+            </div>
+        </section>
+
+        <!-- Participant Management Table Card -->
+        <section class="table-card">
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px; text-align: center;">No.</th>
+                            <th style="min-width: 160px;">Participant Name</th>
+                            <th style="text-align: center; width: 90px;">Pre-Survey</th>
+                            <th style="text-align: center; width: 90px;">Post-Survey</th>
+                            <th style="text-align: center; width: 100px;">Email Verified</th>
+                            <th style="text-align: center; width: 100px;">Video Recorded</th>
+                            <th style="min-width: 220px;">Video Link (Google Drive)</th>
+                            <th style="width: 110px; text-align: center;">Status</th>
+                            <th style="min-width: 180px;">Notes</th>
+                            <th style="width: 120px; text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="participant-table-body">
+                        <!-- Table rows generated dynamically by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="empty-state" class="empty-state" style="display: none;">
+                No participant records match the current search or filter criteria.
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Generic Confirmation Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal">
+            <div class="modal-header" id="modal-title">Confirm Action</div>
+            <div class="modal-body" id="modal-body-text">Are you sure you want to proceed with this action?</div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="modal-cancel-btn">Cancel</button>
+                <button class="btn btn-danger" id="modal-confirm-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Default Pre-populated names (First 28)
+        const PREPOPULATED_NAMES = [
+            "Ankush", "Ashok", "Edena", "Varun", "Prakash", "Mahesh", "Viresh",
+            "Mohan", "Manohar", "Sandeep", "Hanumanth", "Manu", "Mahantesh", "Ganesh",
+            "Bhimraj", "Supreet", "Murali", "Freesail", "Satish", "Sudeep",
+            "Sudeep friend", "Karthik", "Tarun", "Chandan", "Suresh", "Ashok friend",
+            "Akash Karniger", "XYZ student"
+        ];
+
+        const TOTAL_SLOTS = 50;
+        const STORAGE_KEY = "gsa_notebook_tracker_data_v1";
+
+        // Global State Array for 50 slots
+        let participantsData = [];
+
+        // Dynamic Initialization
+        function initializeData() {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                try {
+                    const parsed = JSON.parse(savedData);
+                    if (Array.isArray(parsed) && parsed.length === TOTAL_SLOTS) {
+                        participantsData = parsed;
+                        return;
+                    }
+                } catch (e) {
+                    console.error("Failed to parse localStorage data, initializing fresh dataset.", e);
+                }
+            }
+
+            // Generate initial array of exactly 50 slots
+            participantsData = [];
+            for (let i = 0; i < TOTAL_SLOTS; i++) {
+                const name = i < PREPOPULATED_NAMES.length ? PREPOPULATED_NAMES[i] : "";
+                participantsData.push({
+                    id: i + 1,
+                    name: name,
+                    preSurvey: false,
+                    postSurvey: false,
+                    emailVerified: false,
+                    videoRecorded: false,
+                    videoLink: "",
+                    notes: ""
+                });
+            }
+            saveDataToStorage();
+        }
+
+        // Save data to localStorage
+        function saveDataToStorage() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(participantsData));
+        }
+
+        // Check if participant meets all criteria for "Completed" status
+        function isParticipantCompleted(item) {
+            const hasName = item.name.trim().length > 0;
+            const validUrl = isValidHttpUrl(item.videoLink);
+            return hasName && item.preSurvey && item.postSurvey && item.emailVerified && item.videoRecorded && validUrl;
+        }
+
+        // Determine Status: "Not Started", "In Progress", or "Completed"
+        function getParticipantStatus(item) {
+            const hasName = item.name.trim().length > 0;
+            if (!hasName) return "Not Started";
+
+            if (isParticipantCompleted(item)) {
+                return "Completed";
+            }
+
+            const anyStarted = item.preSurvey || item.postSurvey || item.emailVerified || item.videoRecorded || item.videoLink.trim().length > 0 || item.notes.trim().length > 0;
+            return anyStarted ? "In Progress" : "Not Started";
+        }
+
+        // Validate URL format (http or https)
+        function isValidHttpUrl(string) {
+            if (!string || string.trim() === "") return false;
+            try {
+                const url = new URL(string.trim());
+                return url.protocol === "http:" || url.protocol === "https:";
+            } catch (_) {
+                return false;
+            }
+        }
+
+        // Render Table & Update Statistics
+        function renderDashboard() {
+            const tbody = document.getElementById("participant-table-body");
+            const emptyState = document.getElementById("empty-state");
+            const searchTerm = document.getElementById("search-input").value.toLowerCase().trim();
+            const filterValue = document.getElementById("filter-select").value;
+
+            tbody.innerHTML = "";
+            let visibleCount = 0;
+
+            participantsData.forEach((item, index) => {
+                const status = getParticipantStatus(item);
+                const hasName = item.name.trim().length > 0;
+
+                // Filtering Logic
+                let passesFilter = true;
+
+                // Search Filter
+                if (searchTerm && !item.name.toLowerCase().includes(searchTerm)) {
+                    passesFilter = false;
+                }
+
+                // Dropdown Filter
+                if (passesFilter) {
+                    switch (filterValue) {
+                        case "NOT_STARTED":
+                            if (status !== "Not Started") passesFilter = false;
+                            break;
+                        case "IN_PROGRESS":
+                            if (status !== "In Progress") passesFilter = false;
+                            break;
+                        case "COMPLETED":
+                            if (status !== "Completed") passesFilter = false;
+                            break;
+                        case "PRE_PENDING":
+                            if (!hasName || item.preSurvey) passesFilter = false;
+                            break;
+                        case "POST_PENDING":
+                            if (!hasName || item.postSurvey) passesFilter = false;
+                            break;
+                        case "EMAIL_PENDING":
+                            if (!hasName || item.emailVerified) passesFilter = false;
+                            break;
+                        case "VIDEO_PENDING":
+                            if (!hasName || (item.videoRecorded && isValidHttpUrl(item.videoLink))) passesFilter = false;
+                            break;
+                    }
+                }
+
+                if (!passesFilter) return;
+
+                visibleCount++;
+
+                // Table Row Class for visual distinction
+                let rowClass = "row-not-started";
+                if (status === "Completed") rowClass = "row-completed";
+                else if (status === "In Progress") rowClass = "row-in-progress";
+
+                const tr = document.createElement("tr");
+                tr.className = rowClass;
+
+                // Status Badge CSS
+                let badgeClass = "status-not-started";
+                if (status === "In Progress") badgeClass = "status-in-progress";
+                if (status === "Completed") badgeClass = "status-completed";
+
+                // Video Link Cell UI
+                const isUrlValid = isValidHttpUrl(item.videoLink);
+                let videoLinkUI = `
+                    <div class="video-link-group">
+                        <input type="text" class="video-url-input" placeholder="Paste Google Drive URL..." 
+                            value="${escapeHtml(item.videoLink)}" 
+                            onchange="updateParticipantField(${index}, 'videoLink', this.value)">
+                        ${isUrlValid 
+                            ? `<a href="${escapeHtml(item.videoLink)}" target="_blank" class="btn btn-sm btn-secondary" title="Open Video Link">🔗 Open</a>`
+                            : `<span class="link-badge-pending">Link Pending</span>`
+                        }
+                    </div>
+                `;
+
+                tr.innerHTML = `
+                    <td style="text-align: center; font-weight: 600; color: var(--text-muted);">${item.id}</td>
+                    <td>
+                        <input type="text" class="table-input-text" placeholder="Enter participant name..." 
+                            value="${escapeHtml(item.name)}" 
+                            onchange="updateParticipantField(${index}, 'name', this.value)">
+                    </td>
+                    <td style="text-align: center;">
+                        <div class="checkbox-container">
+                            <input type="checkbox" class="checkbox-custom" ${item.preSurvey ? 'checked' : ''} 
+                                onchange="updateParticipantField(${index}, 'preSurvey', this.checked)">
+                        </div>
+                    </td>
+                    <td style="text-align: center;">
+                        <div class="checkbox-container">
+                            <input type="checkbox" class="checkbox-custom" ${item.postSurvey ? 'checked' : ''} 
+                                onchange="updateParticipantField(${index}, 'postSurvey', this.checked)">
+                        </div>
+                    </td>
+                    <td style="text-align: center;">
+                        <div class="checkbox-container">
+                            <input type="checkbox" class="checkbox-custom" ${item.emailVerified ? 'checked' : ''} 
+                                onchange="updateParticipantField(${index}, 'emailVerified', this.checked)">
+                        </div>
+                    </td>
+                    <td style="text-align: center;">
+                        <div class="checkbox-container">
+                            <input type="checkbox" class="checkbox-custom" ${item.videoRecorded ? 'checked' : ''} 
+                                onchange="updateParticipantField(${index}, 'videoRecorded', this.checked)">
+                        </div>
+                    </td>
+                    <td>${videoLinkUI}</td>
+                    <td style="text-align: center;">
+                        <span class="status-badge ${badgeClass}">${status}</span>
+                    </td>
+                    <td>
+                        <input type="text" class="table-input-text" placeholder="Add notes..." 
+                            value="${escapeHtml(item.notes)}" 
+                            onchange="updateParticipantField(${index}, 'notes', this.value)">
+                    </td>
+                    <td style="text-align: center;">
+                        <button class="btn btn-sm btn-danger" onclick="confirmResetRow(${index})">Reset</button>
+                    </td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+
+            // Toggle empty state
+            emptyState.style.display = visibleCount === 0 ? "block" : "none";
+
+            // Update Statistics Banner
+            updateStatistics();
+        }
+
+        // Escape HTML to prevent XSS issues in fields
+        function escapeHtml(str) {
+            if (!str) return "";
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Live field updates
+        function updateParticipantField(index, field, value) {
+            participantsData[index][field] = value;
+            saveDataToStorage();
+            renderDashboard();
+            showToast("Saved changes.");
+        }
+
+        // Recalculate and display statistics
+        function updateStatistics() {
+            let addedCount = 0;
+            let preCount = 0;
+            let postCount = 0;
+            let emailCount = 0;
+            let videoCount = 0;
+            let completedCount = 0;
+
+            participantsData.forEach(item => {
+                const hasName = item.name.trim().length > 0;
+                if (hasName) addedCount++;
+                if (item.preSurvey) preCount++;
+                if (item.postSurvey) postCount++;
+                if (item.emailVerified) emailCount++;
+                if (item.videoRecorded) videoCount++;
+                if (isParticipantCompleted(item)) completedCount++;
+            });
+
+            document.getElementById("stat-total-slots").innerText = TOTAL_SLOTS;
+            document.getElementById("stat-added").innerText = addedCount;
+            document.getElementById("stat-pre-survey").innerText = preCount;
+            document.getElementById("stat-post-survey").innerText = postCount;
+            document.getElementById("stat-email-verified").innerText = emailCount;
+            document.getElementById("stat-videos").innerText = videoCount;
+            document.getElementById("stat-completed").innerText = completedCount;
+            document.getElementById("stat-remaining").innerText = TOTAL_SLOTS - addedCount;
+
+            // Overall progress based on 50 slots completion
+            const percent = Math.round((completedCount / TOTAL_SLOTS) * 100);
+            document.getElementById("progress-text").innerText = `${percent}% (${completedCount}/${TOTAL_SLOTS})`;
+            document.getElementById("progress-bar").style.width = `${percent}%`;
+        }
+
+        // Handle Add Participant Action
+        function handleAddParticipant() {
+            // Find first blank slot
+            const emptyIndex = participantsData.findIndex(item => item.name.trim() === "");
+            if (emptyIndex === -1) {
+                showToast("All 50 participant slots are currently occupied!");
+                return;
+            }
+
+            const name = prompt(`Enter name for Participant Slot #${emptyIndex + 1}:`);
+            if (name !== null && name.trim() !== "") {
+                participantsData[emptyIndex].name = name.trim();
+                saveDataToStorage();
+                renderDashboard();
+                showToast(`Participant added to slot #${emptyIndex + 1}.`);
+            }
+        }
+
+        // Handle Search and Filtering UI changes
+        function handleSearchFilterChange() {
+            renderDashboard();
+        }
+
+        // Confirmation Modal Logic
+        function showModal(title, bodyText, onConfirm) {
+            const modal = document.getElementById("confirm-modal");
+            document.getElementById("modal-title").innerText = title;
+            document.getElementById("modal-body-text").innerText = bodyText;
+            modal.classList.add("active");
+
+            const confirmBtn = document.getElementById("modal-confirm-btn");
+            const cancelBtn = document.getElementById("modal-cancel-btn");
+
+            const cleanup = () => {
+                modal.classList.remove("active");
+                confirmBtn.onclick = null;
+                cancelBtn.onclick = null;
+            };
+
+            confirmBtn.onclick = () => {
+                cleanup();
+                onConfirm();
+            };
+
+            cancelBtn.onclick = () => {
+                cleanup();
+            };
+        }
+
+        // Reset individual participant row
+        function confirmResetRow(index) {
+            const name = participantsData[index].name || `Slot #${index + 1}`;
+            showModal(
+                "Reset Participant Data",
+                `Are you sure you want to reset all data for "${name}" (Slot #${index + 1})? This action cannot be undone.`,
+                () => {
+                    participantsData[index] = {
+                        id: index + 1,
+                        name: "",
+                        preSurvey: false,
+                        postSurvey: false,
+                        emailVerified: false,
+                        videoRecorded: false,
+                        videoLink: "",
+                        notes: ""
+                    };
+                    saveDataToStorage();
+                    renderDashboard();
+                    showToast(`Slot #${index + 1} has been reset.`);
+                }
+            );
+        }
+
+        // Reset All Data
+        function confirmResetAll() {
+            showModal(
+                "⚠️ Reset All Dashboard Data",
+                "CRITICAL WARNING: This will permanently delete all 50 participant records, notes, and progress. Are you absolutely sure?",
+                () => {
+                    localStorage.removeItem(STORAGE_KEY);
+                    initializeData();
+                    renderDashboard();
+                    showToast("All dashboard data has been reset to defaults.");
+                }
+            );
+        }
+
+        // Export data to CSV compatible with Excel & Google Sheets
+        function exportCSV() {
+            const headers = [
+                "Slot No.",
+                "Participant Name",
+                "Pre-Survey Completed",
+                "Post-Survey Completed",
+                "Email Verified",
+                "Video Recorded",
+                "Video Link",
+                "Status",
+                "Notes"
+            ];
+
+            const rows = participantsData.map(item => [
+                item.id,
+                `"${item.name.replace(/"/g, '""')}"`,
+                item.preSurvey ? "TRUE" : "FALSE",
+                item.postSurvey ? "TRUE" : "FALSE",
+                item.emailVerified ? "TRUE" : "FALSE",
+                item.videoRecorded ? "TRUE" : "FALSE",
+                `"${item.videoLink.replace(/"/g, '""')}"`,
+                `"${getParticipantStatus(item)}"`,
+                `"${item.notes.replace(/"/g, '""')}"`
+            ]);
+
+            const csvContent = "data:text/csv;charset=utf-8," 
+                + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `GSA_2026_Study_Notebooks_Tracker_${new Date().toISOString().slice(0, 10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast("CSV file exported successfully.");
+        }
+
+        // Export JSON Backup
+        function exportJSONBackup() {
+            const backupPayload = {
+                metadata: {
+                    ambassador: "Amit",
+                    gid: "14622",
+                    program: "Google Student Ambassador 2026 – Semester 2",
+                    task: "Product Understanding – Study Notebooks",
+                    exportDate: new Date().toISOString()
+                },
+                participants: participantsData
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupPayload, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `GSA_Tracker_Backup_${new Date().toISOString().slice(0, 10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            showToast("JSON backup downloaded.");
+        }
+
+        // Trigger Import File Picker
+        function triggerImportJSON() {
+            document.getElementById("json-file-input").click();
+        }
+
+        // Import JSON Backup with Structure Validation
+        function importJSONBackup(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedObj = JSON.parse(e.target.result);
+                    let importedArray = null;
+
+                    if (Array.isArray(importedObj)) {
+                        importedArray = importedObj;
+                    } else if (importedObj && Array.isArray(importedObj.participants)) {
+                        importedArray = importedObj.participants;
+                    }
+
+                    if (!importedArray || importedArray.length !== TOTAL_SLOTS) {
+                        alert("Invalid backup file structure. File must contain exactly 50 participant records.");
+                        return;
+                    }
+
+                    showModal(
+                        "Import JSON Backup",
+                        "Importing this backup will overwrite your current dashboard data. Do you wish to continue?",
+                        () => {
+                            participantsData = importedArray;
+                            saveDataToStorage();
+                            renderDashboard();
+                            showToast("Dashboard data restored from JSON backup.");
+                        }
+                    );
+
+                } catch (err) {
+                    alert("Failed to parse JSON file: " + err.message);
+                }
+                // Reset file input value
+                event.target.value = "";
+            };
+            reader.readAsText(file);
+        }
+
+        // Helper Toast Notification
+        function showToast(message) {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast";
+            toast.innerText = message;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // Initial Boot
+        document.addEventListener("DOMContentLoaded", () => {
+            initializeData();
+            renderDashboard();
+        });
+    </script>
+</body>
+</html>
